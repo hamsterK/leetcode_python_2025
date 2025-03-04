@@ -12,6 +12,11 @@ Output: [1,2,3,6,9,8,7,4,5]
 
 class Solution:
     def spiralOrder(self, matrix: list[list[int]]) -> list[int]:
+
+        def final_check():
+            if len(matrix) == 0:
+                return True
+
         if len(matrix[0]) == 1:
             return [i[0] for i in matrix]
 
@@ -21,8 +26,8 @@ class Solution:
             # step 1
             answer.extend(matrix[0])
             del matrix[0]
-            if len(matrix) == 0:
-                break
+            if final_check():
+                return answer
 
             # step 2
             for i in range(len(matrix)):
@@ -30,14 +35,14 @@ class Solution:
             for i in reversed(range(len(matrix))):
                 if len(matrix[i]) == 0:
                     del matrix[i]
-            if len(matrix) == 0:
-                break
+            if final_check():
+                return answer
 
             # step 3
             answer.extend(reversed(matrix[-1]))
             del matrix[-1]
-            if len(matrix) == 0:
-                break
+            if final_check():
+                return answer
 
             # step 4
             for i in reversed(range(len(matrix))):
