@@ -17,7 +17,6 @@ Output: 1
 """
 
 
-#  slow solution, to be reviewed
 class Solution:
     def numIslands(self, grid: list[list[str]]) -> int:
         if not grid:
