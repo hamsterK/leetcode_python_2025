@@ -25,27 +25,25 @@ class Solution:
         answer = 0
         left = arr.pop()
         counter = 0
-        while True:
-            if not arr:
-                if right > left and counter >= 2:
-                    counter += 1
-                break
+        flag_descend = False
+        while arr:
             right = left
             left = arr.pop()
             if right < left:
                counter += 1
-            elif right > left and counter >= 2:
+            elif right > left and counter >= 1:
+                flag_descend = True
                 counter += 1
+                if len(arr) == 0:
+                    counter += 1
             else:
-                answer = max(answer, counter)
+                answer = max(answer, counter) if (counter >= 3 and flag_descend) else 0
+                counter = 0
 
-        answer = max(answer, counter) if counter >= 3 else 0
+        answer = max(answer, counter) if (counter >= 3 and flag_descend) else 0
 
         return answer
 
 
-
-
-
 solution = Solution()
-print(solution.longestMountain([9,8,7,6,5,4,3,2,1,0]))
+print(solution.longestMountain([0,2,0,2,1,2,3,4,4,1]))
