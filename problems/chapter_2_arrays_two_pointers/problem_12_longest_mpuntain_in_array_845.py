@@ -20,30 +20,20 @@ Explanation: The largest mountain is [1,4,7,3,2] which has length 5.
 
 class Solution:
     def longestMountain(self, arr: list[int]) -> int:
-        if len(arr) < 3:
-            return 0
         answer = 0
-        left = arr.pop()
-        counter = 0
-        flag_descend = False
-        while arr:
-            right = left
-            left = arr.pop()
-            if right < left:
-               counter += 1
-            elif right > left and counter >= 1:
-                flag_descend = True
-                counter += 1
-                if len(arr) == 0:
-                    counter += 1
-            else:
-                answer = max(answer, counter) if (counter >= 3 and flag_descend) else 0
-                counter = 0
 
-        answer = max(answer, counter) if (counter >= 3 and flag_descend) else 0
+        for i in range(1, len(arr) - 1):
+            if arr[i-1] < arr[i] > arr[i+1]:
+                l = r = i
+                while l > 0 and arr[l] > arr[l-1]:
+                    l -= 1
+
+                while r < len(arr) - 1 and arr[r] > arr[r+1]:
+                    r += 1
+                answer = max(answer, r - l + 1)
 
         return answer
 
 
 solution = Solution()
-print(solution.longestMountain([0,2,0,2,1,2,3,4,4,1]))
+print(solution.longestMountain([0,1,2,3,4,5,4,3,2,1,0]))
