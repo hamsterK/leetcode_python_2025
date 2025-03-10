@@ -30,7 +30,7 @@ class Solution:
     def minimumAbsDifference(self, arr: list[int]) -> list[list[int]]:
         arr.sort()
         answers = list()
-        min_dif = 999999999
+        min_dif = float('inf')  # an infinite integer
         for i in range(len(arr) - 1):
             current_dif = arr[i+1] - arr[i]
             if current_dif < min_dif:
